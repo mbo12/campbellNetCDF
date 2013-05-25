@@ -1,0 +1,20 @@
+<!-- program definition -->
+<!ELEMENT program (progName,tables)>
+
+<!ELEMENT progName (#PCDATA)>
+<!ELEMENT tables (table+)>
+
+<!ELEMENT table (tableName,outputInterval,variables)>
+<!ELEMENT tableName (#PCDATA)>
+<!ELEMENT outputInterval (#PCDATA)>
+<!ELEMENT variables (variable+)>
+
+<!ELEMENT variable (varName,insName?,obsName?,tableColumn, varUnits,varType)>
+<!ELEMENT varName (#PCDATA)>
+<!ELEMENT insName (#PCDATA)>
+<!ELEMENT obsName (#PCDATA)>
+<!ELEMENT tableColumn (#PCDATA)>
+<!ELEMENT varUnits (#PCDATA)>
+<!ELEMENT varType (#PCDATA)>
+
+

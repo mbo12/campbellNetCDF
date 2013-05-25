@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+<!DOCTYPE instruments SYSTEM "instrumentLibrary.dtd">
+<instruments>
+    <instrument>
+        <insName>CNR1</insName>
+        <description>Radiometer</description>
+        <manufacturer>Kipp and Zonen</manufacturer>
+        <variables>
+            <variable>
+                <varName>CG3Dn></varName>
+                <obsName>Longwave Outgoing Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>CG3Up</varName>
+                <obsName>Longwave Incoming Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>CM3Dn</varName>
+                <obsName>Shortwave Outgoing Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>CM3Up</varName>
+                <obsName>Shortwave Incoming Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>CNR1TC</varName>
+                <obsName>CNR1 Temperature</obsName>
+            </variable>
+            <variable>
+                <varName>CNR1TK</varName>
+                <obsName>CNR1TC</obsName>
+            </variable>
+            <variable>
+                <varName>NetRs</varName>
+                <obsName>Net Shortwave Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>NetRl</varName>
+                <obsName>Net Longwave Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>Albedo</varName>
+                <obsName>Albedo</obsName>
+            </variable>
+            <variable>
+                <varName>UpTot</varName>
+                <obsName>Total Incoming Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>DnTot</varName>
+                <obsName>Total Outgoing Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>NetTot</varName>
+                <obsName>Net Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>CG3DnCo</varName>
+                <obsName>Corrected Longwave Outgoing Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>CG3UpCo</varName>
+                <obsName>Corrected Longwave Incoming Radiation</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>HMP45c</insName>
+        <description>Temperature and Relative Humidity Probe</description>
+        <manufacturer>Vaisala</manufacturer>
+        <variables>
+            <variable>
+                <varName>rh_hmp</varName>
+                <obsName>Relative Humidity</obsName>
+            </variable>
+            <variable>
+                <varName>t_hmp</varName>
+                <obsName>Air Temperature</obsName>
+            </variable>
+            <variable>
+                <varName>e_hmp</varName>
+                <obsName>Water Vapor Pressure</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>SI-111</insName>
+        <description>Infrared Radiometer</description>
+        <manufacturer>Apogee Instruments</manufacturer>
+        <variables>
+            <variable>
+                <varName>SensorBodyTemp</varName>
+                <obsName>Sensor Temperature</obsName>
+            </variable>
+            <variable>
+                <varName>Thp_mV_irr</varName>
+                <obsName>Thermopile Output Temperature</obsName>
+            </variable>
+            <variable>
+                <varName>TargetTemp</varName>
+                <obsName>Target Temperature</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>NR-Lite</insName>
+        <description>Radiometer</description>
+        <manufacturer>Kipp and Zonen</manufacturer>
+        <variables>
+            <variable>
+                <varName>net_rad</varName>
+                <obsName>Net Radiation</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>HFP01SC</insName>
+        <description>Soil Heat Flux Plate</description>
+        <manufacturer>Hukseflux</manufacturer>
+        <variables>
+            <variable>
+                <varName>shf</varName>
+                <obsName>Soil Heat Flux</obsName>
+            </variable>
+            <variable>
+                <varName>shf_cal</varName>
+                <obsName>Soil Heat Flux Calibration Parameter</obsName>
+            </variable>
+            <variable>
+                <varName>shf_mV</varName>
+                <obsName>Soil Heat Flux Voltage</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>TE525-L</insName>
+        <description>Tipping Bucket Rain Gage</description>
+        <manufacturer>TEC</manufacturer>
+        <variables>
+            <variable>
+                <varName>rainfall</varName>
+                <obsName>Rainfall</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>TE525MM-L</insName>
+        <description>Tipping Bucket Rain Gage</description>
+        <manufacturer>TEC</manufacturer>
+        <variables>
+            <variable>
+                <varName>rainfall</varName>
+                <obsName>Rainfall</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>CS616</insName>
+        <description>Soil Moisture Probe</description>
+        <manufacturer>Campbell Scientific</manufacturer>
+        <variables>
+            <variable>
+                <varName>pa_mes</varName>
+                <obsName>Response Period of CS616</obsName>
+            </variable>
+            <variable>
+                <varName>pa_us</varName>
+                <obsName>Response Period of CS616</obsName>
+            </variable>
+            <variable>
+                <varName>vw_mes_v0</varName>
+                <obsName>Volumetric Water Content</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>TCAV-L</insName>
+        <description>Soil Temperature Probe</description>
+        <manufacturer>Campbell Scientific</manufacturer>
+        <variables>
+            <variable>
+                <varName>Tsoil</varName>
+                <obsName>Soil Temperature</obsName>
+            </variable>
+            <variable>
+                <varName>del_Tsoil</varName>
+                <obsName>Change in Soil Temperature</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>Therm108</insName>
+        <description>Soil Temperature Probe</description>
+        <manufacturer>Campbell Scientific</manufacturer>
+        <variables>
+            <variable>
+                <varName>T108_C</varName>
+                <obsName>Soil Temperature</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>CMP3-L</insName>
+        <description>Pyranometer</description>
+        <manufacturer>Kipp and Zonen</manufacturer>
+        <variables>
+            <variable>
+                <varName>Solar_Wm2</varName>
+                <obsName>Net Radiation</obsName>
+            </variable>
+            <variable>
+                <varName>Solar_MJ</varName>
+                <obsName>Total Radiation</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>LI-190</insName>
+        <description>Photosynthetically Active Radiation Sensor</description>
+        <manufacturer>LI-COR</manufacturer>
+        <variables>
+            <variable>
+                <varName>PAR_DEN</varName>
+                <obsName>PAR Density</obsName>
+            </variable>
+            <variable>
+                <varName>PAR_Tot</varName>
+                <obsName>PAR Total</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>LI-7500</insName>
+        <description>Open Path CO2/H2O Analyzer</description>
+        <manufacturer>LI-COR</manufacturer>
+        <variables>
+            <variable>
+                <varName>h2o</varName>
+                <obsName>H2O Concentration</obsName>
+            </variable>
+            <variable>
+                <varName>co2</varName>
+                <obsName>CO2 Concentration</obsName>
+            </variable>
+            <variable>
+                <varName>press</varName>
+                <obsName>Atmospheric Pressure</obsName>
+            </variable>
+            <variable>
+                <varName>agc</varName>
+                <obsName>Licor Diagnostic Value</obsName>
+            </variable>
+            <variable>
+                <varName>co2_um_m</varName>
+                <obsName>CO2 Concentration (volume)</obsName>
+            </variable>
+            <variable>
+                <varName>h2o_mm_m</varName>
+                <obsName>H2O Concentration (volume)</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>LWS-L</insName>
+        <description>Dielectric Leaf Wetness Sensor</description>
+        <manufacturer>Decagon</manufacturer>
+        <variables>
+            <variable>
+                <varName>LWmV</varName>
+                <obsName>Leaf Wetness Sensor Voltage</obsName>
+            </variable>
+            <variable>
+                <varName>LWMDry</varName>
+                <obsName>Time that the Leaf Wetness Sensor is Dry</obsName>
+            </variable>
+            <variable>
+                <varName>LWMWet</varName>
+                <obsName>Time that the Leaf Wetness Sensor is Wet</obsName>
+            </variable>
+            <variable>
+                <varName>LWMCon</varName>
+                <obsName>Time that the Leaf Wetness Sensor is Contaminated</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>034b_L</insName>
+        <description>Met One Cup Anemometer</description>
+        <manufacturer>Campbell Scientific</manufacturer>
+        <variables>
+            <variable>
+                <varName>wspeed_met</varName>
+                <obsName>Wind Speed</obsName>
+            </variable>
+            <variable>
+                <varName>wdir_met</varName>
+                <obsName>Wind Direction</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>CSAT-3</insName>
+        <description>Sonic Anemometer</description>
+        <manufacturer>CSAT</manufacturer>
+        <variables>
+            <variable>
+                <varName>Ux</varName>
+                <obsName>Ux</obsName>
+            </variable>
+            <variable>
+                <varName>Uy</varName>
+                <obsName>Uy</obsName>
+            </variable>
+            <variable>
+                <varName>Uz</varName>
+                <obsName>Uz</obsName>
+            </variable>
+            <variable>
+                <varName>Ts</varName>
+                <obsName>Sonic Temperature</obsName>
+            </variable>
+            <variable>
+                <varName>diag_csat</varName>
+                <obsName>Sonic Flag</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>FW1</insName>
+        <description>Type E Fine Wire Thermocouple</description>
+        <manufacturer>Campbell Scientific</manufacturer>
+        <variables>
+            <variable>
+                <varName>fw</varName>
+                <obsName>Fine Wire Temperature</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>Water Vapor Isotope Analyzer</insName>
+        <description>WVIA</description>
+        <manufacturer>Los Gatos Research</manufacturer>
+        <variables>
+            <variable>
+                <varName>WVIA_Month</varName>
+                <obsName>WVIA Month</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_Day</varName>
+                <obsName>WVIA Day</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_Year</varName>
+                <obsName>WVIA Year</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_Hour</varName>
+                <obsName>WVIA Hour</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_Minute</varName>
+                <obsName>WVIA Minute</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_Second</varName>
+                <obsName>WVIA Second</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_h2oppm</varName>
+                <obsName>H2O Concentration ppm</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_h2o_O18_16</varName>
+                <obsName>[H2O18]/[H2O16]</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_HDOoverH2O</varName>
+                <obsName>[HDO]/[H2O]</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_DoverH</varName>
+                <obsName>[D]/[H]</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_O18overO16</varName>
+                <obsName>[18O]/[16O]</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_delD</varName>
+                <obsName>Water Vapor delta D Value</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_del18O</varName>
+                <obsName>Water vapor delta 18O value</obsName>    
+            </variable>
+            <variable>
+                <varName>WVIA_PressTorr</varName>
+                <obsName>Cell Pressure</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_CavTempC</varName>
+                <obsName>Cell Temperature</obsName>
+            </variable>
+            <variable>
+                <varName>WVIA_MirrorTempUS</varName>
+                <obsName>Mirror Ringdown Time</obsName>
+            </variable>
+        </variables>
+    </instrument>
+    <instrument>
+        <insName>KH20</insName>
+        <description>Krypton Hygrometer</description>
+        <manufacturer>Campbell Scientific</manufacturer>
+        <variables>
+            <variable>
+                <varName>rho_w</varName>
+                <obsName>H20 Concentration</obsName>
+            </variable>
+            <variable>
+                <varName>kh_mV</varName>
+                <obsName>KH20 Voltage</obsName>
+            </variable>
+            <variable>
+                <varName>ln_kh</varName>
+                <obsName>Natural Log of KH20 Voltage</obsName>
+            </variable>
+        </variables>
+    </instrument>
+</instruments>
+

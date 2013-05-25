@@ -1,0 +1,16 @@
+
+
+<!-- instruments definition -->
+<!ELEMENT instruments (instrument+)>
+
+<!-- instrument definition -->
+<!ELEMENT instrument (insName,description,manufacturer,variables)>
+<!ELEMENT insName (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT manufacturer (#PCDATA)>
+<!ELEMENT variables (variable+)>
+
+<!-- variable definition -->
+<!ELEMENT variable (varName,obsName)>
+<!ELEMENT varName (#PCDATA)>
+<!ELEMENT obsName (#PCDATA)>
