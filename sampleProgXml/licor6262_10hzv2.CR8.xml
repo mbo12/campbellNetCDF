@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE program
+  SYSTEM 'ecohydrology.dtd'>
+<program>
+	<progName>licor6262_10hzv2.CR8</progName>
+	<tables>
+		<table>
+			<outputInterval>0.1</outputInterval>
+			<tableName>licor6262</tableName>
+			<variables>
+				<variable>
+					<varName>batt_volt</varName>
+					<tableColumn>1</tableColumn>
+					<varUnits></varUnits>
+					<varType>Sample</varType>
+				</variable>
+				<variable>
+					<varName>co2</varName>
+					<tableColumn>2</tableColumn>
+					<varUnits></varUnits>
+					<varType>Sample</varType>
+				</variable>
+				<variable>
+					<varName>h2o</varName>
+					<tableColumn>3</tableColumn>
+					<varUnits></varUnits>
+					<varType>Sample</varType>
+				</variable>
+				<variable>
+					<varName>press</varName>
+					<tableColumn>4</tableColumn>
+					<varUnits></varUnits>
+					<varType>Sample</varType>
+				</variable>
+			</variables>
+		</table>
+	</tables>
+</program>
+
