@@ -31,6 +31,10 @@ def cleanupXML (doc):
   prettyXml = text_re.sub('\g<1>></',xml)
   space_re = re.compile('>\n\s*\n(\s*)<')
   prettyXml = space_re.sub('>\n\g<1><',prettyXml)
+
+  ## soft indent
+  tab_re = re.compile('\t')
+  prettyXml = tab_re.sub('  ',prettyXml)
   return prettyXml
   
   
