@@ -4,7 +4,7 @@
 <!ELEMENT progName (#PCDATA)>
 <!ELEMENT tables (table+)>
 
-<!ELEMENT table (tableName,outputInterval,variables)>
+<!ELEMENT table (outputInterval,tableName,variables)>
 <!ELEMENT tableName (#PCDATA)>
 <!ELEMENT outputInterval (#PCDATA)>
 <!ELEMENT variables (variable+)>
@@ -17,4 +17,13 @@
 <!ELEMENT varUnits (#PCDATA)>
 <!ELEMENT varType (#PCDATA)>
 
+<!-- observations definition -->
+<!ELEMENT observations (observation+)>
+
+<!ELEMENT observation (obsName,varName+,varUnits?, minValue?, maxValue?)>
+
+
+
+<!ELEMENT minValue (#PCDATA)>
+<!ELEMENT maxValue (#PCDATA)>
 

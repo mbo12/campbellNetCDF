@@ -46,7 +46,11 @@ def createNewProgramXML ():
   doc = imp.createDocument(None,'program',doctype)
   return doc  
   
-  
+def createNewXML(root):
+  imp = xml.dom.minidom.DOMImplementation()
+  doctype = imp.createDocumentType (root, '','ecohydrology.dtd')
+  doc = imp.createDocument(None,root,doctype)
+  return doc
 def addTextNodeToRoot (doc,nodeName,nodeValue):
   newNode = doc.createElement(nodeName)
   (doc.documentElement).appendChild(newNode)
