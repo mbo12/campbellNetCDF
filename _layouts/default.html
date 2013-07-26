@@ -31,14 +31,24 @@
         
             
       body {
-   
-
      
       margin: 30px auto;}
       .container-fluid {
           padding-left: 15%;
           padding-right: 15%;
-      }    </style>
+      } 
+/* Large desktop */
+@media (min-width: 1200px) { .container-fluid {
+padding-left:22.5%;
+padding-right:22.5%; }}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { .container-fluid {
+     padding-left:0%;
+     pading-right:0%; }}}
+
+
+   </style>
 
 {{ page.hero }}
 <div class="navbar navbar-fixed-top">
