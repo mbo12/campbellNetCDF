@@ -174,17 +174,16 @@ class Table:
           return instruction[1]+abbrev
   
   def __origName (self,rep,instruction,abbrev):
-     ### does it have an alias or fieldname?
-     if instruction[1] + abbrev != self.__varNameToWriteOut(rep,instruction,abbrev):
-       return instruction[1]
-     ### is it an alias or field name
+    ### is it an alias or field name
      aliasToOrig = _revdic(self.aliases,instruction[1])
      if aliasToOrig:  ##handle array caseX
         array = re.match('^(.*?)(\(\d+\))$',aliasToOrig)
         if array:
-          return array.group(1)+abbrev+array.group(2)
+          return array.group(1)
         else:
           return aliasToOrig #+abbrev
+     array = re.match('^(.*?)(\(\d+\))$',instruction[1])
+     if array: return array.group(1)
      return instruction[1]
 
 
