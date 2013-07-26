@@ -9,7 +9,8 @@
 <!ELEMENT outputInterval (#PCDATA)>
 <!ELEMENT variables (variable+)>
 
-<!ELEMENT variable (varName,insName?,obsName?,tableColumn, varUnits,varType)>
+<!ELEMENT variable (varName,origName?,insName?,obsName?,tableColumn, varUnits,varType)>
+<!ELEMENT origName (#PCDATA)>
 <!ELEMENT varName (#PCDATA)>
 <!ELEMENT insName (#PCDATA)>
 <!ELEMENT obsName (#PCDATA)>
