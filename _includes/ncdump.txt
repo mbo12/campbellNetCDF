@@ -1,0 +1,26 @@
+netcdf MpalaTower_2013_206 {
+
+group: \10MinEpoch {
+  dimensions:
+  	time = 143 ;
+  variables:
+  	double dates(time) ;
+  	double SoilTemp_10cm_Avg(time) ;
+  		SoilTemp_10cm_Avg:units = "degC" ;
+  		SoilTemp_10cm_Avg:obsName = "soilTemperature" ;
+  		SoilTemp_10cm_Avg:minVal = "10" ;
+  		SoilTemp_10cm_Avg:maxVal = "60" ;
+  	double SoilTemp_30cm_Avg(time) ;
+  		SoilTemp_30cm_Avg:units = "degC" ;
+  		SoilTemp_30cm_Avg:obsName = "soilTemperature" ;
+  		SoilTemp_30cm_Avg:minVal = "10" ;
+  		SoilTemp_30cm_Avg:maxVal = "60" ;
+  	double batt_volt_Min(time) ;
+  	double SoilTemp_20cm_Avg(time) ;
+  		SoilTemp_20cm_Avg:units = "degC" ;
+  		SoilTemp_20cm_Avg:obsName = "soilTemperature" ;
+  		SoilTemp_20cm_Avg:minVal = "10" ;
+  		SoilTemp_20cm_Avg:maxVal = "60" ;
+  data:
+  } // group \10MinEpoch
+}

@@ -1,0 +1,45 @@
+---
+layout: default
+title: About
+hero: <div class="hero-unit" style="text-align:center"><h1>Campbell to netCDF</h1><p>A set of utilities to make processing of Campbell logger files easier.</p><p><a class="btn btn-primary btn-large" href="http://github.com/mbo12/campbellNetcdf/">View Source</a></p></div>
+---
+<style>
+
+.link {
+   fill: none;
+   stroke:#2B60DE;
+   stroke-width: 1.5px;
+}
+
+
+.hero-unit {
+   padding: 40px;
+}
+
+svg {
+ font: 15px sans-serif;
+ display: block;
+ margin: 0 auto;
+
+}
+.node {
+   stroke: #fff;
+}
+
+</style>
+<div id="home">
+  <h1>Campbell to NetCDF Utilities</h1>
+      <p>We use <a href="http://campbellsci.com">Campbell Scientific</a> dataloggers in our environmental research, and like many users, we have multiple loggers at just one site, each collecting multiple data tables. For ease of analysis, we want to herd these tables into a single file or database that supports querying across all of our information. Further, neede to document metadata from a diverse set of sources; this extra documentation is key for ensuring that the data can be shared across labs.</p>
+      <p>Here's our solution: a set of utilities for processing the Campbell Scientific data file format into a self-described <a href="http://www.unidata.ucar.edu/software/netcdf/">netCDF</a> file. Along the way, we provide support for generating xml files of additional metadata such as calibration schedules, instrument information, and observation units. </p>
+<div id="solution"></div>
+      <p>Our work flow is to make a single daily netcdf file for each day in the record and to then create version of the file as we engage in post-processing. However, we aim to be flexible by creating some configuration files so you can target these utilities to your needs. Or, the complete source is available on github, so feel free to fork our project!</p>
+
+  <h1>Using Campbell to NetCDF for my data</h1>
+      Check out the <a href="/demo/">demo</a> to see whether this may be useful for your group! A full user's guide is also <a href="/gettingStarted">available.</a>
+
+</div>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="js/solution.js"></script>
+<script type="text/javascript">
+  document.getElementById("home").className = "active";
+</script>

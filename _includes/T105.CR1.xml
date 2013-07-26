@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<!DOCTYPE program
+  SYSTEM 'ecohydrology.dtd'>
+<program>
+  <progName>T105.CR1</progName>
+  <tables>
+    <table>
+      <outputInterval>600.0</outputInterval>
+      <tableName>Temperature</tableName>
+      <variables>
+        <variable>
+          <varName>batt_volt_Min</varName>
+          <tableColumn>1</tableColumn>
+          <varUnits></varUnits>
+          <varType>Minimum</varType>
+        </variable>
+        <variable>
+          <varName>SoilTemp_10cm_Avg</varName>
+          <tableColumn>2</tableColumn>
+          <varUnits>degC</varUnits>
+          <varType>Average</varType>
+        </variable>
+        <variable>
+          <varName>SoilTemp_20cm_Avg</varName>
+          <tableColumn>3</tableColumn>
+          <varUnits>degC</varUnits>
+          <varType>Average</varType>
+        </variable>
+        <variable>
+          <varName>SoilTemp_30cm_Avg</varName>
+          <tableColumn>4</tableColumn>
+          <varUnits>degC</varUnits>
+          <varType>Average</varType>
+        </variable>
+      </variables>
+    </table>
+  </tables>
+</program>
+

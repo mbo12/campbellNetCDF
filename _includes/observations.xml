@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<!DOCTYPE observations
+  SYSTEM 'ecohydrology.dtd'>
+<observations>
+  <observation>
+    <obsName>soilTemperature</obsName>
+    <varName>T105_C</varName>
+    <varUnits>degC</varUnits>
+    <minValue>10</minValue>
+    <maxValue>60</maxValue>
+  </observation>
+</observations>
+

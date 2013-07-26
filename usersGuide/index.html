@@ -1,0 +1,25 @@
+---
+layout: default
+title: Getting Started
+hero: <div class="hero-unit" style="text-align:center"><h1>User's Guide</h1><p>How to get your Campbell data files into NetCDF format</p></div>
+---
+
+<h2>Downloads and Installation</h2>
+<h3>netCDF</h3>
+Getting your files into netCDF format will require downloading the netCDF software. We recommend building with HDF5. This gives support for netCDF4 and allows the netCDF file to include groups of data. So first, you will need to get HFD5.You will also need the zlib distribution. Unidata  offers a complete set of installation instructions <a href="http://www.unidata.ucar.edu/software/netcdf/docs/">here</a>.
+<h3>Python</h3>
+
+Fast version: Use the Enthought python distribution, which includes many useful scientific libraries, including numpy and netCDF4 which will be needed for this project.
+<p>
+Longer version: install python, numpy, and netCDF4 yourself. <a href="http://python.org/download/">Python 2.7</a> is recommended. For interfacing with the netCDF software, we are using the excellent python module  <a href="http://netcdf4-python.googlecode.com/svn/trunk/docs/netCDF4-module.html">netCDF</a>. You will need to first install the python scientific library <a href="http://www.numpy.org/">numpy</a>.</p>
+
+
+<h3>campbellNetCDF Code</h3>All of our code is posted on github. You can download a zip file of the current version <a href="https://github.com/mbo12/campbellNetCDF/archive/master.zip">here</a>.
+
+<h2>Making the metadata XMLs</h2>
+<h3>Program xmls</h3>
+ 
+ The observation xml has to be created based on manual inputs, but there are several ways to help automate the process. We have a command-line utility which scrapes every variable name from a set of program xmls, and prompts the user to supply an observation name (if exists) for each variable. This can be tedious (since many observation names are shared across variables), so we also allow for the building of  the xml from a simple user-created csv file. Lastly, we also offer a utility which will guess at variable names and groups--guesses which will mostly be useful only if you closely follow the Campbell naming conventions set up in sample code in program manuals :).
+<script type="text/javascript">
+  document.getElementById("usersGuide").className = "active";
+</script>
