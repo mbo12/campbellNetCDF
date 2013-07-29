@@ -15,7 +15,7 @@ var svg = d3.select("#solution").append("svg")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-   var links = [{"source":"netcdf file", "target":"xml metadata"},{"source":"xml metadata","target":"datalogger code"},{"source":"xml metadata","target":"sensor id"},{"source":"xml metadata","target":"site info"},{"target":"observations","source":"xml metadata"}];
+   var links = [{"source":"NetCDF file", "target":"metadata XML"},{"source":"metadata XML","target":"datalogger code"},{"source":"metadata XML","target":"sensor ID"},{"source":"metadata XML","target":"site info"},{"target":"observations","source":"metadata XML"}];
    var nodesByName = {};
    links.forEach(function(link) {
       var parent = link.source = nodeByName(link.source),
@@ -65,7 +65,7 @@ svg.append("foreignObject")
     .append("xhtml:body")
     .style("font", "14px sans-serif")
     .style("padding-top","0")
-    .html("<p><b>How it works:</b> We programmatically pull in relevant metadata from CRBasic datalogger code. We also make it easy to incorporate user-input, such as sensor id, site info, observation units, and more. The metadata is stored as an xml, where it can be a stand-alone documentation source. The metadata is also pulled into the netcdf format, where it serves as attributes for the variables.");
+    .html("<p><b>How it works:</b> We programmatically pull in relevant metadata from CRBasic datalogger code. We also make it easy to incorporate user-input, such as sensor id, site info, observation units, and more. The metadata is stored as an XML, where it can be a stand-alone documentation source. The metadata is then pulled into the NetCDF format, where it serves as attributes for the variables.");
 
   function nodeByName(name) {
      return nodesByName[name] || (nodesByName[name] = {name: name});

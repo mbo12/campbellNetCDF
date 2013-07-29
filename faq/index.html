@@ -4,17 +4,17 @@ title: FAQ
 hero: <div class="hero-unit" style="text-align:center"><h1>FAQ</h1><p>Some additional questions and details about the project</p></div>
 ---
 <style> h2 { text-align:left;}</style>
-<h2> Why netCDF?</h2>
-<p>When looking for a data storage solution, we wanted a system that would make it easy for us to analyze the data and for our collaboraters to work with it as well. The netCDF file format has allowed us to accomplish both of these goals.</p>
+<h2> Why NetCDF?</h2>
+<p>When looking for a data storage solution, we wanted a system that would make it easy for us to analyze the data and for our collaboraters to work with it as well. The NetCDF file format has allowed us to accomplish both of these goals.</p>
 </div
 </div>
 <div class="row-fluid">
   <div class="span11 offset1">
     <ul>
-      <li><b>Attributes</b>We love the ability to include all relevant metadata for a variable: units, processing instruction, instrument measured by, observation of, location collected at, etc.</li>
+      <li><b>Attributes</b> We love the ability to include all relevant metadata for a variable: units, processing instruction, instrument measured by, observation of, location collected at, etc.</li>
       <li><b>Uniform Structure</b> Whenever we get a new instrument for our field site, our data table schema has to change. Analyzing these csv files becomes a pain: the processing script needs to handle a number of different structures.
-   When processing via netcdf, we simply have a uniform structure for the whole tower record. Values can simply be filled with NaNs for periods when a sensor was not being recorded. This saves researcher time and simplifies code by allowing for a single processing script</li>
-      <li><b>Groups</b> Netcdf4 is built on top of HDF5. This means it supports a hierarchial grouping of data. We use this to group by epoch (the turbulent 10Hz data is in a separate group). Grouping by sampling frequency has made our post-processing easier.</li>
+   When processing via NetCDF, we simply have a uniform structure for the whole tower record. Values are filled with NaNs for periods when a sensor was not being recorded. A consistent structure allows for a single processing script, which saves a researcher's time and simplifies code.</li>
+      <li><b>Groups</b> NetCDF4 is built on top of HDF5. This means it supports a hierarchial grouping of data. We use this feature to group by epoch (the turbulent 10Hz data is in a separate group). Grouping by sampling frequency has made our post-processing easier.</li>
     </ul>
   </div>
 </div>

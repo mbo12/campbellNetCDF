@@ -1,7 +1,7 @@
 --- 
 layout: default
 title: demo
-hero: <div class="hero-unit" style="text-align:center"><h1>Demo</h1><p>The campbellNetcdf code allows you to store data collected by Campbell Scientific dataloggers in the netCDF file format. Learn about:</p><div class="row-fluid"><div class="span4"><a href="#crbasic" id="crbasicbtn" class="btn btn-primary btn-large">Extracting metadata from CRBasic Code</a></div><div class="span4"><a href="#obsxml" id="obsxmlbtn" class="btn btn-primary btn-large">Incorporating Observation metadata</a></div><div class="span4"><a href="#netcdf" id="netcdfbtn" class="btn btn-primary btn-large">Creating the netCDF file</a></div></div></div>
+hero: <div class="hero-unit" style="text-align:center"><h1>Demo</h1><p>The campbellNetcdf code allows you to store data collected by Campbell Scientific dataloggers in the NetCDF file format. Learn about:</p><div class="row-fluid"><div class="span4"><a href="#crbasic" id="crbasicbtn" class="btn btn-primary btn-large">Extracting metadata from CRBasic Code</a></div><div class="span4"><a href="#obsxml" id="obsxmlbtn" class="btn btn-primary btn-large">Incorporating Observation metadata</a></div><div class="span4"><a href="#netcdf" id="netcdfbtn" class="btn btn-primary btn-large">Creating the NetCDF file</a></div></div></div>
 ---
 <style>
 
@@ -19,7 +19,7 @@ hero: <div class="hero-unit" style="text-align:center"><h1>Demo</h1><p>The campb
 
 <div class="span6" id="explanation" >
 
-This sample code measures soil temperature at three depths using T105 temperature probes.  (Scroll down on the code snippet to see the rest of the file). The code follows the CRBasic syntax for declaring units and variable aliases. This metadata would end up in the CRBasic file output header lines, but we want to be able to pull them into our xml files where they can be combined with other key information to form a well-documented netCDF4 file. 
+This sample datalogger program  measures soil temperature at three depths using T105 temperature probes.  (Scroll down on the code snippet to see the rest of the file). The code follows the CRBasic syntax for declaring units and variable aliases. This metadata would end up in the CRBasic file output header lines, but we want to pull them into our XML files where they can be combined with other key information to form a well-documented NetCDF4 file. 
 </div>
    <div class="span6" style="overflow:scroll" id="highlight">
 {% highlight python %}
@@ -33,7 +33,7 @@ This sample code measures soil temperature at three depths using T105 temperatur
   <div class="span6" id="parsing">
     A python script parses that CRBasic code and writes this XML file.  For each output table, all of the variables are listed, along with their table column, units, and instruction type. 
 <p>
-   Parsing the logger program as opposed to the data files for their headers offers some advantages. Batch processing of many different data files is easy: we run through each logger program to create a program xml file. Based on all the program xmls, we can generate a uniform netCDF file structure, and then we can easily populate that as we read the data files. In our lab, it has been useful since the program structure has changed several times (for example, we add a sensor to the tower and change our output table). </p>
+   Parsing the logger program as opposed to the data files for their headers offers some advantages. Batch processing of many different data files is easy: we run through each logger program to create a program XML file. Based on all the program XMLs, we generate a uniform NetCDF file structure, and then we can easily populate that empty NetCDF file as we read the data files. In our lab, this workflow has been useful since the program structure has changed several times (for example, we add a sensor to the tower and change our output table). When we make a new version of a CRBasic program, we create a new program XML. Current raw data files are processed according to the current version of the program XMLs, but all of the program XMLs are used to ensure a consistent NetCDF structure.</p>
   </div>
 
   <div class="span6" id="progxml" style="overflow: scroll">
@@ -51,7 +51,7 @@ This sample code measures soil temperature at three depths using T105 temperatur
 <div class="row-fluid">
   <div class="span6">
 
-     Observation metadata is an example of user-input data that we incorporate into our XML files and into the netcdf as attributes. In our observation xml, we store minimum and maximum expected values for each observation type. This allows us to easily flag suspect values in initial data processing and quality checks.   In the above program, SoilTemp_10cm_Avg, SoilTemp_20cm_Avg, and SoilTemp_30cm_Avg are all variables that are observations of soil temperature. An observation can be associated with multiple variable names, but in this case, we simply include the form "Temp105_C" since the processing script will match with the Campbell array names Temp105_C(1), Temp105_C(2), and Temp105_C(3) (even though those names are ultimately written out as their aliases in this case). See <a href="{{site.baseurl}}/usersGuide">the user's guide</a> for information on how to help automate the creation of the observations.xml and other user-generated documention.
+     Observation metadata is an example of user-input data that we incorporate into our XML files and into the Netcdf as attributes. In our observation XML, we store minimum and maximum expected values for each observation type. This allows us to easily flag suspect values in initial data processing and quality checks.   In the above program, SoilTemp_10cm_Avg, SoilTemp_20cm_Avg, and SoilTemp_30cm_Avg are all variables that are observations of soil temperature. An observation can be associated with multiple variable names, but in this case, we simply include the form "Temp105_C" since the processing script will match with the Campbell array names Temp105_C(1), Temp105_C(2), and Temp105_C(3) (even though those names are ultimately written out as their aliases in this case). See <a href="{{site.baseurl}}/usersGuide">the user's guide</a> for information on how to help automate the creation of the observations.XML and other user-generated documentation.
 
    
     </div>
@@ -63,13 +63,13 @@ This sample code measures soil temperature at three depths using T105 temperatur
    </div>
   <div class="row-fluid">
     <div class="span12"> 
-      <h2 id="netcdf">Creating the netcdf file</h2>
+      <h2 id="netcdf">Creating the Netcdf file</h2>
 </div>
 </div>
 <div class="row-fluid">
 <div class="span6" id="netcdfPar">
-Our code next creates an empty netcdf file with space allocated for all of the variables in the program xml. In this case, that was just the single program with a single output table. Additional variable attributes come from the other xml files. We define groups in our netcdf based on sampling frequency. 
-The schema for the netcdf based on the xml files in this demo is shown. This schema was created with the 'ncdump -c' command (ncdump ships with the netcdf software). We have just scratched the surface of adding metadata, but already the file is more self-describing that a Campbell csv file. We see that we have observations of soil temperature, and the valid range of values is included. 
+Our code next creates an empty NetCDF file with space allocated for all of the variables in the program XML. In this case, that was just the single program with a single output table. Additional variable attributes come from the other XML files. We define groups in our NetCDF based on sampling frequency. 
+The schema for the NetCDF based on the XML files in this demo is shown. This schema was created with the 'ncdump -c' command (ncdump ships with the NetCDF software). We have just scratched the surface of adding metadata, but already the file is more self-describing that a Campbell csv file. We see that we have observations of soil temperature, and the valid range of values is included. 
 </div>
 <div class="span6" id="ncdump" style="overflow:scroll">
 {% highlight python  %}
@@ -81,7 +81,8 @@ The schema for the netcdf based on the xml files in this demo is shown. This sch
 <div class="row-fluid">
 <div class="span12">
 <br>
-The demo is for a simple CRBasic program, but a major benefit of this code is the ability to incorporate multiple data  streams into a single uniform netCDF file.
+<h2>More</h2>
+The demo is for a simple CRBasic program, but a major benefit of this code is the ability to incorporate multiple data  streams into a single uniform NetCDF file. Check out the <a href="{{site.url}}{{site.baseurl}}usersGuide">user's guide</a> to see how to use this for your data 
 <script type="text/javascript">
    $("#highlight").height(document.getElementById("explanation").clientHeight);
    $("#progxml").height(document.getElementById("parsing").clientHeight);
