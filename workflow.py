@@ -2,6 +2,7 @@
 import argparse
 import calendar
 import createNetcdfs
+import towerlog
 
 def days_in_year(year):
     if calendar.isleap(year):
@@ -34,6 +35,7 @@ def main():
     parser.add_argument('--end_date', help='end netcdf date in format YYYY_DOY, eg 2014_365', required=True)
     parser.add_argument('--program_xml_dir', help='location of program xml files', required=True)
     parser.add_argument('--obs_xml_file', help='path of observation.xml file', required=True)
+    parser.add_argument('--data_dir', help='path of raw datalogger files', required=True)
 
     args = parser.parse_args()
 
@@ -42,6 +44,9 @@ def main():
     for file_name in files_to_make(args.start_date, args.end_date):
         createNetcdfs.makeEmptyNetcdf(file_name, vars, obsTypes, obsLimits)
 
+    program_deployments = towerlog.Deployments()
+    for data_file in towerlog.gen_files(args.data_dir):
+        program_deployments.check_file(data_file)
 
 if __name__ == '__main__':
     main()
