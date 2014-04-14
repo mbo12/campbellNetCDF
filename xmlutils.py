@@ -1,7 +1,7 @@
 import xml.dom.minidom
 import re
 """Module with a couple of xml helper functions"""
-
+DTD_FILE = 'ecohydrology.dtd'
 
 ### add an element with tagName and text content "value" as a child of 
 ### parentElement in doc  
@@ -27,14 +27,14 @@ def cleanupXML (doc):
   xml = text_re.sub('>\g<1></', xml)
   
   ## case where value is empty (only extra whitespaces)
-  text_re = re.compile('(<[^/<>]*?)>\s*</',re.DOTALL)
-  prettyXml = text_re.sub('\g<1>></',xml)
+  text_re = re.compile('(<[^/<>]*?)>\s*</', re.DOTALL)
+  prettyXml = text_re.sub('\g<1>></', xml)
   space_re = re.compile('>\n\s*\n(\s*)<')
-  prettyXml = space_re.sub('>\n\g<1><',prettyXml)
+  prettyXml = space_re.sub('>\n\g<1><', prettyXml)
 
   ## soft indent
   tab_re = re.compile('\t')
-  prettyXml = tab_re.sub('  ',prettyXml)
+  prettyXml = tab_re.sub('  ', prettyXml)
   return prettyXml
   
   
@@ -46,14 +46,14 @@ def getText (node,tag):
 # new xml doc of program type following ecohydrology.dtd  
 def createNewProgramXML ():
   imp = xml.dom.minidom.DOMImplementation()
-  doctype = imp.createDocumentType ('program', '','ecohydrology.dtd')
-  doc = imp.createDocument(None,'program',doctype)
+  doctype = imp.createDocumentType ('program', '', DTD_FILE)
+  doc = imp.createDocument(None, 'program', doctype)
   return doc  
   
 def createNewXML(root):
   imp = xml.dom.minidom.DOMImplementation()
-  doctype = imp.createDocumentType (root, '','ecohydrology.dtd')
-  doc = imp.createDocument(None,root,doctype)
+  doctype = imp.createDocumentType (root, '', DTD_FILE)
+  doc = imp.createDocument(None, root, doctype)
   return doc
 def addTextNodeToRoot (doc,nodeName,nodeValue):
   newNode = doc.createElement(nodeName)

@@ -37,7 +37,7 @@ class Variables:
   def __init__(self):
     self.variables = []
     
-  def getVar(self,name):
+  def getVar(self, name):
      if name in self.variables:
        return self.variables[self.variables.index(name)]
      else:
@@ -45,19 +45,19 @@ class Variables:
          if j.alias == name:
            return j
            
-  def addVar(self,name):
+  def addVar(self, name):
     new = Variable(name)
     self.variables.append(new)
 
      
 class Variable:
-  def __init__(self,name):
+  def __init__(self, name):
     self.name = name
     self.alias = ''
     self.fieldname = ''
     self.units = ''
   
-  def __cmp__(self,other):
+  def __cmp__(self, other):
     return self.name==other
     
 
@@ -76,7 +76,7 @@ class Table:
   
   ### initialize the table based on table text from program as well as
   ### the aliases, constants, and units defined for the program
-  def __init__(self,tableText,aliases,constants,units):
+  def __init__(self, tableText, aliases, constants, units):
       self.tableText = tableText
       self.name = self.__getTableName(tableText)
       self.aliases = aliases
@@ -89,13 +89,13 @@ class Table:
       self.colPosition = 0
       
   ### add outputInterval and tableName to the programxml      
-  def addTableInfo (self,doc,tableNode):
-    addTextElement(doc,tableNode,'outputInterval',self.interval)
-    addTextElement(doc,tableNode,'tableName',self.name)  
+  def addTableInfo (self, doc, tableNode):
+    addTextElement(doc, tableNode, 'outputInterval', self.interval)
+    addTextElement(doc, tableNode, 'tableName', self.name)  
     
     
   ### see if there are units assigned for this variable
-  def lookupUnits (self,variable):
+  def lookupUnits (self, variable):
     if variable in self.units:
       return (self.units[variable])
     ### units can also defined by the var's alias
@@ -103,7 +103,7 @@ class Table:
       return (self.units[self.aliases[variable]])
     else:
       ### sometimes units are defined for whole array--check for this  
-      array = re.search('(.*?)\(?(\d*)\)',variable)
+      array = re.search('(.*?)\(?(\d*)\)', variable)
       if array and array.group(1) in self.units:
         return self.units[array.group(1)]
       else:
@@ -111,21 +111,21 @@ class Table:
   
 
   ## if instrument is in our library, return observationType info  
-  def lookupInstrument(self,variable,insLib):
+  def lookupInstrument(self, variable, insLib):
     baseName = _getBasename(variable)
     variables = insLib.getElementsByTagName('varName')
     for j in variables:
       name = j.childNodes[0].data
       if name==baseName:
         ins=_getInstrument(j)
-        obs=getText(j.parentNode,'obsName')
-        return (ins,obs)
-    return (None,None)
+        obs=getText(j.parentNode, 'obsName')
+        return (ins, obs)
+    return (None, None)
     
   
   ### go through the output instructions for this table and write the variable
   ### info to the program xml          
-  def processOutputInstructions (self,doc,variables,insLib):
+  def processOutputInstructions (self, doc, variables, insLib):
     for meas in self.outputInstructions:
       # repeated measurment on an array variable
       for i in range(meas[2]):
@@ -137,52 +137,52 @@ class Table:
        
         # add metadata for this variable
         
-        addTextElement(doc,varNode,'varName',self.__varNameToWriteOut((i+1),meas,abbrev[meas[0]]))
-        addTextElement(doc,varNode,'origName',self.__origName((i+1),meas,abbrev[meas[0]]))
-        ins,obs = self.lookupInstrument(meas[1],insLib)
+        addTextElement(doc, varNode, 'varName', self.__varNameToWriteOut((i+1), meas, abbrev[meas[0]]))
+        addTextElement(doc, varNode, 'origName', self.__origName((i+1), meas, abbrev[meas[0]]))
+        ins, obs = self.lookupInstrument(meas[1],insLib)
         if ins:
-          addTextElement(doc,varNode,'insName',ins)
-          addTextElement(doc,varNode,'obsName',obs)  
-        addTextElement(doc,varNode,'tableColumn',self.colPosition)
-        addTextElement(doc,varNode,'varUnits',self.lookupUnits(meas[1]))
-        addTextElement(doc,varNode,'varType',meas[0])
+          addTextElement(doc, varNode, 'insName', ins)
+          addTextElement(doc, varNode, 'obsName', obs)  
+        addTextElement(doc, varNode, 'tableColumn', self.colPosition)
+        addTextElement(doc, varNode, 'varUnits', self.lookupUnits(meas[1]))
+        addTextElement(doc, varNode, 'varType', meas[0])
         
         variables.appendChild(varNode)
 
-  def __allCommands (self,text):
+  def __allCommands (self, text):
     commands = [(self.__getCommand(j) for j in text.splitlines())]
 
   # what command/operation does this measurement instruction use (eg average)
-  def __getCommand (self,line):
+  def __getCommand (self, line):
     command = commandRE.match(line)
     if command:
       params = command.group(2).split(',')
-      return command.group(1),params
+      return command.group(1), params
             
   ### variable name that is being written out (fieldnames or aliases)
-  def __varNameToWriteOut (self,rep,instruction,abbrev):
+  def __varNameToWriteOut (self, rep, instruction, abbrev):
       if len(instruction) > 3 + (rep-1):
         ### store fieldname
         return instruction[3][rep-1]
       elif  instruction[1] in self.aliases:
         return self.aliases[instruction[1]]+abbrev
       else: ### no fieldnames or aliases defined
-        array = re.match('^(.*?)(\(\d+\))$',instruction[1])
+        array = re.match('^(.*?)(\(\d+\))$', instruction[1])
         if array:
           return array.group(1)+abbrev+array.group(2)
         else:
           return instruction[1]+abbrev
   
-  def __origName (self,rep,instruction,abbrev):
+  def __origName (self, rep, instruction, abbrev):
     ### is it an alias or field name
-     aliasToOrig = _revdic(self.aliases,instruction[1])
+     aliasToOrig = _revdic(self.aliases, instruction[1])
      if aliasToOrig:  ##handle array caseX
-        array = re.match('^(.*?)(\(\d+\))$',aliasToOrig)
+        array = re.match('^(.*?)(\(\d+\))$', aliasToOrig)
         if array:
           return array.group(1)
         else:
           return aliasToOrig #+abbrev
-     array = re.match('^(.*?)(\(\d+\))$',instruction[1])
+     array = re.match('^(.*?)(\(\d+\))$', instruction[1])
      if array: return array.group(1)
      return instruction[1]
 
@@ -190,40 +190,40 @@ class Table:
     
      
   ### adjust index based on rep of output instruction        
-  def __incrementArrayIndex (self,variable):
-    array = re.search('(.*?)\s*\(?(\d*)\)',variable)
+  def __incrementArrayIndex (self, variable):
+    array = re.search('(.*?)\s*\(?(\d*)\)', variable)
     variable = array.group(1) + '(' + str(int(array.group(2))+1) + ')'
     return variable
   
   ### parse measurement instruction to get parameters  
-  def __getInstructionParameters(self,instructionName,parameterNumber):
-    line = re.search(instructionName+r'\s*\((.*?)\)',self.tableText)
+  def __getInstructionParameters(self, instructionName, parameterNumber):
+    line = re.search(instructionName+r'\s*\((.*?)\)', self.tableText)
     if not line and instructionName =='DataInterval':
       return '1'
     params = line.group(1).split(',')
-    paramNeeded = re.search(r'^\s*(.*?)\s*$',params[parameterNumber-1])
+    paramNeeded = re.search(r'^\s*(.*?)\s*$', params[parameterNumber-1])
     return paramNeeded.group(1)
     
-  def __getTableName (self,table):
-    return self.__getInstructionParameters('DataTable',1)
+  def __getTableName (self, table):
+    return self.__getInstructionParameters('DataTable', 1)
 
   ### output instructions
-  def __getOutputInstructions (self,table):
+  def __getOutputInstructions (self, table):
     outputInstructions = 'Average|StdDev|Totalize|Minimum|Maximum|Sample'
     output =[]
 
     lines = table.splitlines()
    
     for i in range(len(lines)):
-      instruction = re.search(r'^\s*('+outputInstructions+')\s*\((.*)\)',lines[i])
+      instruction = re.search(r'^\s*('+outputInstructions+')\s*\((.*)\)', lines[i])
 
       if instruction:
         parameters = instruction.group(2).split(',')
         for j in range(len(parameters)):
-          nowhitespace=re.match('^\s*(.*?)\s*$',parameters[j])
+          nowhitespace=re.match('^\s*(.*?)\s*$', parameters[j])
           parameters[j]=nowhitespace.group(1)
         ### make sure reps is a number. if it is a constant, replace
-        isInt = re.search('^\s*\d*\s*$',parameters[0])
+        isInt = re.search('^\s*\d*\s*$', parameters[0])
         if not isInt:
           parameters[0] = self.constants[parameters[0]]
           
@@ -233,38 +233,38 @@ class Table:
         ### if first rep (of multiple) isn't array, use reverse lookup in aliases
         ### we need to work in array form to understand what next variable will be
         if parameters[0] > 1 :
-          array = re.search('(.*?)\(?(\d*)\)',parameters[1])
+          array = re.search('(.*?)\(?(\d*)\)', parameters[1])
           if not array:
-            parameters[1] = _revdic(self.aliases,parameters[1])
-            array = re.search('(.*?)\(?(\d*)\)',parameters[1])
+            parameters[1] = _revdic(self.aliases, parameters[1])
+            array = re.search('(.*?)\(?(\d*)\)', parameters[1])
             if not array:
               raise Exception('variable with multiple reps not in array format')
               
               
         ### if we're writing fieldnames, return them too
         if i+1 != len(lines): 
-          fieldnames = re.search(r'^\s*FieldNames\s*\("(.*)"\)',lines[i+1])
+          fieldnames = re.search(r'^\s*FieldNames\s*\("(.*)"\)', lines[i+1])
           if fieldnames:
             names = fieldnames.group(1).split(',')
-            output.append([instruction.group(1),parameters[1],parameters[0],names])
+            output.append([instruction.group(1), parameters[1], parameters[0], names])
             continue
         
-        output.append([instruction.group(1),parameters[1],parameters[0]])
+        output.append([instruction.group(1), parameters[1], parameters[0]])
 
     return output
 
   ### find frequency of this table
-  def __getOutputPeriod (self,table):
+  def __getOutputPeriod (self, table):
     ## returns the output period of a table in seconds
-    interval = self.__getInstructionParameters('DataInterval',2)
+    interval = self.__getInstructionParameters('DataInterval', 2)
     if interval:
-      time = re.search(r'^\d*$',interval)
+      time = re.search(r'^\d*$', interval)
       if not time:
         ### we don't have support for expressions (ie CONST + CONST)
-        time = re.search(r'^\s*(.*?)\s*$',interval)
+        time = re.search(r'^\s*(.*?)\s*$', interval)
         interval = self.constants[time.group(1)]
       interval = float(interval)
-      units = self.__getInstructionParameters('DataInterval',3)
+      units = self.__getInstructionParameters('DataInterval', 3)
       if units == "Min":
         interval = interval * 60
       elif  units == "mSec":

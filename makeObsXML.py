@@ -1,12 +1,17 @@
-#### from a csv file of the form "obsName,varName,obsUnits,minValue,maxValue"
+#### 
 # create an observations.xml file
+# usage: python makeObsXML.py INPUT_FILE OUTPUT_FILE
+# input: from a csv file of the form "obsName,varName,obsUnits,minValue,maxValue"
+# output: xml file
+
 import xmlutils
+import sys
 csvFormat = ['obsName','varName','varUnits','minValue','maxValue']
 
 def main():
   obsXml = xmlutils.createNewXML('observations')
 
-  obs = 'obs.csv'
+  obs = sys.argv[1]
   with open(obs,'rU') as f:
     observations = f.readlines()
 
@@ -17,7 +22,7 @@ def main():
         if not (len(fields[i])==0 ) and len(fields[i].split())>0:
             xmlutils.addTextElement(obsXml,obsNode,csvFormat[i],fields[i])
 
-  xmlout = open('observations.xml','w')
+  xmlout = open(sys.argv[2],'w')
   print >> xmlout, xmlutils.cleanupXML(obsXml)
   
 if __name__ == '__main__':

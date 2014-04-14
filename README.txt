@@ -10,6 +10,5 @@ The data file resulting from the crbasic program has 4 headers lines (with those
 
 The objective is to increase documentation quality so to better allow collaborating with the data. Automation of the documentation is chosen whenever possible.
 
-To run a test case (on the included crbasic sample code file flux.cr3), please run 
-python makeProgXML.py
-The program output is an xml file "flux.cr3.xml".z 
+
+More walkthroughs here: http://mbo12.github.io/campbellNetCDF/

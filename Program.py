@@ -17,11 +17,11 @@ def removeCommentedText (towerProgram):
   progWithoutComments = ""
   for line in towerProgram.splitlines():
     # keep everything until first '
-    lineToKeep = re.search(r"^([^'])+",line)
+    lineToKeep = re.search(r"^([^'])+", line)
     if lineToKeep:
-      if re.search(r'^\s*$',lineToKeep.group()): continue
+      if re.search(r'^\s*$', lineToKeep.group()): continue
       # in case chomped, sep with a newline character
-      progWithoutComments = '\n'.join([progWithoutComments,lineToKeep.group()])
+      progWithoutComments = '\n'.join([progWithoutComments, lineToKeep.group()])
   return progWithoutComments    
 
 def findNumericValueForString(str):
@@ -39,14 +39,14 @@ def substituteConstants(text):
   keys = constants.keys()
   keys.sort(key=len, reverse=True)
   for name in keys:
-    text = re.sub(name,constants[name],text)
+    text = re.sub(name, constants[name], text)
   return text
   
 
 def substituteMathOperators(text):
   for operator in CRBASICtoPython:
-    text = re.sub(r'^'+operator+r'\s*'+r'(\()',CRBASICtoPython[operator]+r'\1',text)
-    text = re.sub(r'(\s|/|\*|\+|\-|\=)'+operator+r'\s*'+r'(\()',r'\1'+CRBASICtoPython[operator]+r'\2',text)
+    text = re.sub(r'^'+operator+r'\s*'+r'(\()', CRBASICtoPython[operator]+r'\1', text)
+    text = re.sub(r'(\s|/|\*|\+|\-|\=)'+operator+r'\s*'+r'(\()', r'\1'+CRBASICtoPython[operator]+r'\2', text)
   return text
   
     
@@ -54,14 +54,14 @@ def substituteMathOperators(text):
 def getAliases (towerProgram):
   aliases = {}
   for line in towerProgram.splitlines():
-    alias = re.search(r'^\s*Alias\s*(.*?)\s*=\s*(.*?)\s*$',line)
+    alias = re.search(r'^\s*Alias\s*(.*?)\s*=\s*(.*?)\s*$', line)
     if alias:   
       aliases[alias.group(1)] = alias.group(2)
   return aliases
 
 def getVariables(towerProgram):
   for line in towerProgram.splitlines():
-    var = re.search(r'^\s*(?:Public|Dim)\s*([^\s]+(\s*\(.*\))?)',line)
+    var = re.search(r'^\s*(?:Public|Dim)\s*([^\s]+(\s*\(.*\))?)', line)
     if var:
       variables.append(var.group(1))
   adjustForArrayVars()
@@ -69,7 +69,7 @@ def getVariables(towerProgram):
 def adjustForArrayVars():
   for j in variables:
     var = substituteConstants(j)
-    array=re.search(r'^([^\s])\s*\((\d+)\)',var)
+    array=re.search(r'^([^\s])\s*\((\d+)\)', var)
     if array:
       for f in range(int(array.group(2))):
         variables.append(array.group(1)+'(%s)'%str(f+1))
@@ -80,9 +80,9 @@ def adjustForArrayVars():
 ### Put program constants in a dictionary  
 def getConstants (towerProgram):
   for line in towerProgram.splitlines():
-    constant = re.search(r'^\s*Const\s*(.*?)\s*=\s*(.*?)\s*$',line)
+    constant = re.search(r'^\s*Const\s*(.*?)\s*=\s*(.*?)\s*$', line)
     if constant:
-      numeric = re.search(r'^\d+\.?\d*$',constant.group(2))
+      numeric = re.search(r'^\d+\.?\d*$', constant.group(2))
       if not numeric:
         const = findNumericValueForString(constant.group(2))
         constants[constant.group(1)] = str(const)
@@ -96,7 +96,7 @@ def getConstants (towerProgram):
 def getUnits(towerProgram):
   units = {}
   for line in towerProgram.splitlines():
-    unit = re.search(r'^\s*Units\s*(.*?)\s*=\s*(.*?)\s*$',line)
+    unit = re.search(r'^\s*Units\s*(.*?)\s*=\s*(.*?)\s*$', line)
     if unit:
       units[unit.group(1)] = unit.group(2)
   return units
@@ -110,11 +110,11 @@ def getTables(towerProgram):
   j = 0
   while j < len(towerProgram):
     line = towerProgram[j]
-    startTable = re.search(r'^\s*DataTable\s*\((.*?)\)',line)
+    startTable = re.search(r'^\s*DataTable\s*\((.*?)\)', line)
     if startTable:
       table = line
       j+=1
-      while not re.search(r'^\s*EndTable',towerProgram[j]):
+      while not re.search(r'^\s*EndTable', towerProgram[j]):
         table = '\n'.join([table, towerProgram[j]])
         j+=1
       tables.append(table)
@@ -123,7 +123,7 @@ def getTables(towerProgram):
 
 def main():
   ### test case on flux.cr3
-  with open('flux.cr3','r') as f:
+  with open('flux.cr3', 'r') as f:
     text = f.readlines()
   text = removeCommentedText(text)
   

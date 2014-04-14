@@ -6,11 +6,11 @@ from Table import Table
 import Program
 import xmlutils 
     
-
+## usage: python makeProgXML.py CRBASRIC_PROG_FILENAME
 
 def main ():
   
-  prog = 'T105.CR1' 
+  prog = sys.argv[1]
   ## open program to parse (read whole program into memory, it's small enough)
   with open(prog,'r') as f:
     towerProgram = Program.removeCommentedText(f.read())

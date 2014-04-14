@@ -20,27 +20,27 @@ class towerVariables ():
     self.varUnits = {}
     self.origNames = {} ## ie not alias name
     
-  def addVar(self,interval,name):
+  def addVar(self, interval, name):
     epoch = self.variables.get(interval)
     if epoch == None:
       self.variables[interval] = set()
       epoch = self.variables[interval]
     epoch.add(name)
   
-  def addUnits(self,name,unit):
+  def addUnits(self, name, unit):
     self.varUnits[name] = unit
 
-  def getUnits(self,name):
+  def getUnits(self, name):
     return self.varUnits.get(name)
     
   def gen(self):
     for k in self.variables:
       yield k, self.variables[k]
   
-  def addOrig (self,varName,origName):
+  def addOrig (self, varName, origName):
     self.origNames[varName]=origName
   
-  def getOrig (self,name):
+  def getOrig (self, name):
     return self.origNames.get(name)
           
   def __iter__(self):
@@ -48,49 +48,50 @@ class towerVariables ():
       
 
 
-def grabVariables (progXML,variables):
+def addVariables (progXML, variables):
   ### get all variable names for each epoch in progxml
   tables = progXML.getElementsByTagName('table')
   for table in tables:
-    interval = (getText(table,'outputInterval'))
+    interval = (getText(table, 'outputInterval'))
     if interval == 'None':
       interval = 1.0
     else:
       interval = float(interval)
     vars = table.getElementsByTagName('variable')
     for var in vars:
-      name = getText(var,'varName')
-      variables.addVar(interval,name)
+      name = getText(var, 'varName')
+      variables.addVar(interval, name)
       ### metadata: get units
-      units = getText(var,'varUnits')
+      units = getText(var, 'varUnits')
       if units:
-        variables.addUnits(name,units)
-      origName = getText(var,'origName')
+        variables.addUnits(name, units)
+      origName = getText(var, 'origName')
       ### original name (ie not alias. so as to match up with other metadata)
       if origName: 
-        variables.addOrig(name,origName)
+        variables.addOrig(name, origName)
+  return variables
         
-        
-def getObservations (obsXml):
+def getObservations (obsXmlFile):
+  obsXml = xml.dom.minidom.parse(obsXmlFile)
   ### get metadata from obsXml
   obsTypes = {}
   obsLimits = {}
   observations = obsXml.getElementsByTagName('observation')
   for obs in observations:
-    obsName = getText(obs,'obsName')
-    varName = getText(obs,'varName')
-    minVal = getText(obs,'minValue')
-    maxVal = getText(obs,'maxValue')
+    obsName = getText(obs, 'obsName')
+    varName = getText(obs, 'varName')
+    minVal = getText(obs, 'minValue')
+    maxVal = getText(obs, 'maxValue')
     obsTypes[varName] = obsName
-    obsLimits[obsName] = (minVal,maxVal)
+    obsLimits[obsName] = (minVal, maxVal)
   return obsTypes, obsLimits
   
     
-def makeShell(filename,vars,obsTypes,obsLimits):
+def makeEmptyNetcdf(filename, vars, obsTypes, obsLimits):
   ## make daily empty netcdf file for vars
-  ## include metadata of obsTypes and obsLimits
+ ## include metadata of obsTypes and obsLimits
   
-  netcdf = Dataset(filename,'w',format='NETCDF4')
+  netcdf = Dataset(filename, 'w', format='NETCDF4')
   for epoch, var in vars:
     ## add group for epoch if it's not already in the netcdf file
     try:
@@ -98,25 +99,25 @@ def makeShell(filename,vars,obsTypes,obsLimits):
     except:
       grp = netcdf.createGroup(groupName(epoch))
       ## time dimension: allocate space in file based on sampling interval
-      dim = grp.createDimension('time',24*60*60/epoch-1)
-      grp.createVariable('dates','f8',('time',))
+      dim = grp.createDimension('time', 24*60*60/epoch-1)
+      grp.createVariable('dates', 'f8', ('time',))
 
     for v in var:
-      varID = grp.createVariable(v,'f8',('time',))
+      varID = grp.createVariable(v, 'f8', ('time',))
       ### attributes from metadata
       u = vars.getUnits(v)
       if u: 
         varID.units = u
       if v in obsTypes:
         obsName = obsTypes[v]
-        writeObsAttributes(varID,obsName,obsLimits[obsName])
+        writeObsAttributes(varID, obsName, obsLimits[obsName])
       elif vars.getOrig(v):
         if vars.getOrig(v) in obsTypes:
           obsName = obsTypes[vars.getOrig(v)]
-          writeObsAttributes(varID,obsName,obsLimits[obsName])
+          writeObsAttributes(varID, obsName, obsLimits[obsName])
   netcdf.close()
 
-def writeObsAttributes(varID,obsName,obsLimits):
+def writeObsAttributes(varID, obsName, obsLimits):
   varID.obsName = obsName
   ### add limits if defined
   if obsLimits[0] != None:
@@ -125,8 +126,8 @@ def writeObsAttributes(varID,obsName,obsLimits):
     varID.maxVal = obsLimits[1]
     
     
-def fileName(year,doy):
-  return ROOTNAME + '_%d_%03d.nc' % (year,doy)
+def fileName(year, doy):
+  return ROOTNAME + '_%d_%03d.nc' % (year, doy)
 
 def groupName(epoch):
   ## based on sampling period define epoch name
@@ -138,28 +139,25 @@ def groupName(epoch):
   else:
     mins = int(epoch/60)
     return '%dMinEpoch' % mins
-  
-              
-def test():
-  ### all variables from the program xmls
-  fileList = os.listdir('.')
+
+def getAllVariables(progXmlDir):
   vars = towerVariables()
-  for file in fileList:
-    if file == 'flux.cr3.xml':continue
+  for file in os.listdir(progXmlDir):
     if isProgXML(file):
-      progXML = xml.dom.minidom.parse(file)
-      grabVariables (progXML,vars)
+      progXML = xml.dom.minidom.parse(progXmlDir + '/' + file)
+      vars = addVariables (progXML, vars)
+  return vars
   
-  ### all observations metadata
-  obsXml = xml.dom.minidom.parse('observations.xml')
-  obsTypes, obsLimits = getObservations(obsXml)
+def test():
+  vars = getAllVariables('sampleProgXml')
+  obsTypes, obsLimits = getObservations('observations.xml')
   
   
   ## make for today only
   now = time.localtime()
   startYear = now[0]
   startDOY = now[7]
-  makeShell(fileName(startYear,startDOY),vars,obsTypes,obsLimits)
+  makeEmptyNetcdf(fileName(startYear, startDOY), vars, obsTypes, obsLimits)
  
       
     
