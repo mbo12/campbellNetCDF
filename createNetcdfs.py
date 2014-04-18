@@ -99,7 +99,7 @@ def makeEmptyNetcdf(filename, vars, obsTypes, obsLimits):
     except:
       grp = netcdf.createGroup(groupName(epoch))
       ## time dimension: allocate space in file based on sampling interval
-      dim = grp.createDimension('time', 24*60*60/epoch-1)
+      dim = grp.createDimension('time', 24*60*60/epoch)
       grp.createVariable('dates', 'f8', ('time',))
 
     for v in var:
