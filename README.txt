@@ -1,3 +1,5 @@
+More walkthroughs here: http://mbo12.github.io/campbellNetCDF/
+
 This code sample represents an effort to extract information from CRBASIC datalogger programs (made by Campbell Scientific).  CRBASIC is a language that runs on microprocessors commonly used in the environmental sciences. 
 
 A CRBASIC program structure is:
@@ -10,5 +12,8 @@ The data file resulting from the crbasic program has 4 headers lines (with those
 
 The objective is to increase documentation quality so to better allow collaborating with the data. Automation of the documentation is chosen whenever possible.
 
-
-More walkthroughs here: http://mbo12.github.io/campbellNetCDF/
+A sample workflow to put it all together is in workflow.py:
+usage: python workflow.py  --start_date START_DATE --end_date END_DATE
+                   --program_xml_dir PROGRAM_XML_DIR --obs_xml_file
+                   OBS_XML_FILE --data_dir DATA_DIR
+The script will make empty netcdfs from START_DATE to END_DATE based on schema from the supplied xml files. Then, all the loggernet files in DATA_DIR will be added to the proper netcdfs. (The campbell headers are using the line up the data files with the proper program xml. There is some hackery to account for program files without a header since that occurs when campbell makes backup files).
