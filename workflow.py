@@ -3,6 +3,8 @@ import argparse
 import calendar
 import createNetcdfs
 import towerlog
+import processDatFile
+import loggernetfile
 
 def days_in_year(year):
     if calendar.isleap(year):
@@ -37,6 +39,7 @@ def main():
     parser.add_argument('--obs_xml_file', help='path of observation.xml file', required=True)
     parser.add_argument('--data_dir', help='path of raw datalogger files', required=True)
 
+
     args = parser.parse_args()
 
     vars = createNetcdfs.getAllVariables(args.program_xml_dir)
@@ -45,8 +48,18 @@ def main():
         createNetcdfs.makeEmptyNetcdf(file_name, vars, obsTypes, obsLimits)
 
     program_deployments = towerlog.Deployments()
-    for data_file in towerlog.gen_files(args.data_dir):
-        program_deployments.check_file(data_file)
+    for file_name in towerlog.gen_files(args.data_dir):
+        program_deployments.check_file(file_name)
+
+    for file_name in towerlog.gen_files(args.data_dir):
+        if file_name == "/Volumes/LaCie/Users/mollyoconnor/mpalaTower/towerdataOct2012/MainTowerCR3000_V9.CR3": continue
+        print 'processing', file_name
+        logger_name = loggernetfile.getLoggerName(file_name)
+        campbell_date = loggernetfile.getFirstDate(file_name)
+        table_name = loggernetfile.getTableName(file_name)
+        program_name = program_deployments.find_program_running(logger_name, campbell_date)
+        data_file = processDatFile.DataFile(file_name, program_name, table_name)
+        data_file.process()
 
 if __name__ == '__main__':
     main()
