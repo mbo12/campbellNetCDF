@@ -130,15 +130,12 @@ def fileName(year, doy):
   return ROOTNAME + '_%d_%03d.nc' % (year, doy)
 
 def groupName(epoch):
-  ## based on sampling period define epoch name
-  ## if sampling period < 1 min, define in Hz (freq)
-  ## else, name based on minutes in sampling period
   if epoch <= 1:
-    freq = int(1.0/epoch)
-    return '%dHzEpoch' % freq
+    return '%dmSecEpoch' % int(1000 * epoch)
+  elif epoch < 60:
+    return '%dSecEpoch' % epoch
   else:
-    mins = int(epoch/60)
-    return '%dMinEpoch' % mins
+    return '%dMinEpoch' % int(epoch / 60)
 
 def getAllVariables(progXmlDir):
   vars = towerVariables()
