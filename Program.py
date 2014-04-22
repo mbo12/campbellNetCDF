@@ -6,6 +6,30 @@ import math
 constants = {}
 variables=[]
 
+CRBASICtoPython = {'ACOS':'math.acos',
+'ASIN':'math.asin',
+'ATN':'math.atan',
+'ATN2':'math.atan2',
+'COS':'math.cos',
+'COSH':'math.cosh',
+'SIN':'math.sin',
+'SINH':'math.sinh',
+'TAN':'math.tan',
+'TANH':'math.tanh',
+'ABS':'abs',
+'Ceiling':'math.ceil',
+'EXP':'math.exp',
+'Floor':'math.floor',
+'INT':'math.floor',
+'FIX':'math.floor',
+'INTDV':'//',
+'LN':'math.log',
+'LOG':'math.log',
+'LOG10':'math.log10',
+'MOD':'%',
+'PWR':'math.pow',
+'Round':'round',
+'Sqr':'math.sqrt'}
 
 
 
